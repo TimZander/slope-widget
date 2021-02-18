@@ -68,20 +68,23 @@ class SlopeWidgetView extends WatchUi.View {
             //yAccel = -37;
             //zAccel = -305;
 
-            pitch = 180 * Math.atan2(yAccel, Math.sqrt(Math.pow(xAccel, 2) + Math.pow(zAccel, 2)));
-            roll = 180 * Math.atan2(-xAccel, zAccel);
-            // while(pitch > 90){
-            //     pitch = pitch - 90;
-            // }
+            pitch = 180 * Math.atan2(yAccel, Math.sqrt(Math.pow(xAccel, 2) + Math.pow(zAccel, 2))) / Math.PI;
+            roll = 180 * Math.atan2(-xAccel, zAccel) / Math.PI;
+            if(pitch > -180 and pitch < 0){
+                pitch = -pitch;
+            }
             // while(pitch < -90){
             //     pitch = pitch + 90;
             // }
-            // while(roll > 90){
-            //     roll = roll - 90;
-            // }
-            // while(roll < -90){
-            //     roll = roll + 90;
-            // }
+            while(roll > 90){
+                roll = roll - 180;
+            }
+            while(roll < -90){
+                roll = roll + 180;
+            }
+            if(roll > -180 and roll < 0){
+                roll = -roll;
+            }
         }
     }
 }
