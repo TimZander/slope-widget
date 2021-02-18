@@ -6,6 +6,7 @@ class SlopeWidgetView extends WatchUi.View {
     var debugLabel;
     var pitchLabel;
     var rollLabel;
+    var inclinationLabel;
     hidden var timer;
     var degreeSymbol = StringUtil.utf8ArrayToString([0xC2,0xB0]);
     hidden var xAccel;
@@ -13,6 +14,7 @@ class SlopeWidgetView extends WatchUi.View {
     hidden var zAccel;
     hidden var pitch;
     hidden var roll;
+    hidden var inclination;
 
     function initialize() {
         View.initialize();
@@ -24,6 +26,7 @@ class SlopeWidgetView extends WatchUi.View {
         debugLabel = View.findDrawableById("debugOutput");
         pitchLabel = View.findDrawableById("pitch");
         rollLabel = View.findDrawableById("roll");
+        inclinationLabel = View.findDrawableById("inclination");
     }
 
     // Called when this View is brought to the foreground. Restore
@@ -42,6 +45,7 @@ class SlopeWidgetView extends WatchUi.View {
         debugLabel.setText("x: " + xAccel + ", y: " + yAccel + ", z: " + zAccel);
         pitchLabel.setText("pitch: " + pitch.format("%.1f") + degreeSymbol);
         rollLabel.setText("roll: " + roll.format("%.1f") + degreeSymbol);
+        inclinationLabel.setText("incl: " + inclination.format("%.2f") + degreeSymbol);
         View.onUpdate(dc);
     }
 
@@ -67,24 +71,32 @@ class SlopeWidgetView extends WatchUi.View {
             //xAccel = -921;
             //yAccel = -37;
             //zAccel = -305;
+            
+            var pitchRad = Math.atan2(yAccel, Math.sqrt(Math.pow(xAccel, 2) + Math.pow(zAccel, 2)));
+            var rollRad = Math.atan2(-xAccel, zAccel);
+            var inclinationRad = Math.atan(Math.sqrt(Math.pow(Math.tan(pitchRad), 2) + Math.pow(Math.tan(rollRad), 2)));
+            pitch = Math.toDegrees(pitchRad);
+            roll = Math.toDegrees(rollRad);
+            inclination = Math.toDegrees(inclinationRad);
+            sanitizeAngles();
+        }
+    }
 
-            pitch = 180 * Math.atan2(yAccel, Math.sqrt(Math.pow(xAccel, 2) + Math.pow(zAccel, 2))) / Math.PI;
-            roll = 180 * Math.atan2(-xAccel, zAccel) / Math.PI;
-            if(pitch > -180 and pitch < 0){
-                pitch = -pitch;
-            }
-            // while(pitch < -90){
-            //     pitch = pitch + 90;
-            // }
-            while(roll > 90){
-                roll = roll - 180;
-            }
-            while(roll < -90){
-                roll = roll + 180;
-            }
-            if(roll > -180 and roll < 0){
-                roll = -roll;
-            }
+    function sanitizeAngles(){
+        if(pitch > -180 and pitch < 0){
+            pitch = -pitch;
+        }
+        // while(pitch < -90){
+        //     pitch = pitch + 90;
+        // }
+        while(roll > 90){
+            roll = roll - 180;
+        }
+        while(roll < -90){
+            roll = roll + 180;
+        }
+        if(roll > -180 and roll < 0){
+            roll = -roll;
         }
     }
 }
