@@ -1,4 +1,5 @@
 <strings>
     <string id="AppName">SlopeWidget</string>
     <string id="showDebugTitle">Show Debug Info</string>
+    <string id="changeColorTitle">Change text color to correspond to avalanche danger</string>
 </strings>
