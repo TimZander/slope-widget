@@ -30,26 +30,7 @@ class CalculateInclinations{
         else{
             alphaSafe = false;
         }
-        sanitizeAngles();
         setColor();
-    }
-
-    function sanitizeAngles(){
-        if(pitch > -180 and pitch < 0){
-            pitch = -pitch;
-        }
-        // while(pitch < -90){
-        //     pitch = pitch + 90;
-        // }
-        while(roll > 90){
-            roll = roll - 180;
-        }
-        while(roll < -90){
-            roll = roll + 180;
-        }
-        if(roll > -180 and roll < 0){
-            roll = -roll;
-        }
     }
 
     function setColor(){
