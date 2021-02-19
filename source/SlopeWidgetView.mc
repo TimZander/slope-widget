@@ -10,17 +10,24 @@ class SlopeWidgetView extends WatchUi.View {
     hidden var timer;
     var degreeSymbol = StringUtil.utf8ArrayToString([0xC2,0xB0]);
     hidden var _c;
+    hidden var _app;
 
     function initialize() {
+        _app = Application.getApp();
         View.initialize();
     }
 
     // Load your resources here
     function onLayout(dc) {
-        setLayout(Rez.Layouts.MainLayout(dc));
-        debugLabel = View.findDrawableById("debugOutput");
-        pitchLabel = View.findDrawableById("pitch");
-        rollLabel = View.findDrawableById("roll");
+        if(_app.getProperty("showDebug") == null ? true : _app.getProperty("showDebug")){
+            setLayout(Rez.Layouts.DebugLayout(dc));
+            debugLabel = View.findDrawableById("debugOutput");
+            pitchLabel = View.findDrawableById("pitch");
+            rollLabel = View.findDrawableById("roll");
+        }
+        else{
+            setLayout(Rez.Layouts.MainLayout(dc));
+        }
         inclinationLabel = View.findDrawableById("inclination");
     }
 
@@ -38,9 +45,11 @@ class SlopeWidgetView extends WatchUi.View {
         _c.calculate();
         //System.println("x: " + xAccel + ", y: " + yAccel + ", z: " + zAccel);
         //System.println("pitch: " + pitch.format("%.1f") + ", roll: " + roll.format("%.1f"));
-        debugLabel.setText("x: " + _c.xAccel + ", y: " + _c.yAccel + ", z: " + _c.zAccel);
-        pitchLabel.setText("pitch: " + _c.pitch.format("%.1f") + degreeSymbol);
-        rollLabel.setText("roll: " + _c.roll.format("%.1f") + degreeSymbol);
+        if(_app.getProperty("showDebug") == null ? true : _app.getProperty("showDebug")){
+            debugLabel.setText("x: " + _c.xAccel + ", y: " + _c.yAccel + ", z: " + _c.zAccel);
+            pitchLabel.setText("pitch: " + _c.pitch.format("%.1f") + degreeSymbol);
+            rollLabel.setText("roll: " + _c.roll.format("%.1f") + degreeSymbol);
+        }
         inclinationLabel.setText("incl: " + _c.inclination.format("%.1f") + degreeSymbol);
         View.onUpdate(dc);
     }
