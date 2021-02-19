@@ -2,6 +2,7 @@
     <properties>
     	<property id="showDebug" type="boolean">false</property>
         <property id="changeColor" type="boolean">true</property>
+        <property id="showAlpha" type="boolean">true</property>
     </properties>
 
     <settings>
@@ -9,6 +10,9 @@
             <settingConfig type="boolean" />
 		</setting>
         <setting propertyKey="@Properties.changeColor" title="@Strings.changeColorTitle">
+            <settingConfig type="boolean" />
+		</setting>
+        <setting propertyKey="@Properties.showAlpha" title="@Strings.showAlphaTitle">
             <settingConfig type="boolean" />
 		</setting>
     </settings>

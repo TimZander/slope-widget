@@ -3,9 +3,10 @@ using Toybox.Timer;
 
 class SlopeWidgetView extends WatchUi.View {
 
-    var debugLabel, pitchLabel, rollLabel, inclinationLabel;
+    var debugLabel, pitchLabel, rollLabel, inclinationLabel, alphaLabel;
     hidden var timer;
     var degreeSymbol = StringUtil.utf8ArrayToString([0xC2,0xB0]);
+    var alphaSymbol = StringUtil.utf8ArrayToString([0xce,0xb1]);
     hidden var _c;
     hidden var _app;
 
@@ -26,6 +27,7 @@ class SlopeWidgetView extends WatchUi.View {
             setLayout(Rez.Layouts.MainLayout(dc));
         }
         inclinationLabel = View.findDrawableById("inclination");
+        alphaLabel = View.findDrawableById("alpha");
     }
 
     // Called when this View is brought to the foreground. Restore
@@ -50,6 +52,10 @@ class SlopeWidgetView extends WatchUi.View {
         inclinationLabel.setText("incl: " + _c.inclination.format("%.1f") + degreeSymbol);
         if(_app.getProperty("changeColor") == null ? true : _app.getProperty("changeColor")){
             inclinationLabel.setColor(_c.color);
+        }
+        if(_app.getProperty("displayAlpha") == null ? true : _app.getProperty("displayAlpha")){
+            alphaLabel.setColor(_c.alphaColor);
+            alphaLabel.setText(alphaSymbol + ">");
         }
         View.onUpdate(dc);
     }
