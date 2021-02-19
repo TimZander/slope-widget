@@ -24,19 +24,26 @@ class SlopeWidgetGlanceView extends WatchUi.GlanceView {
     // Update the view
     function onUpdate(dc) {
         _c.calculate();
-        var glanceAlphaText = alphaSymbol;
-        if(!_c.alphaSafe){
-            glanceAlphaText = "X"+glanceAlphaText;
-        }
-        //System.println( _c.inclination.format("%.1f"));
-        dc.setColor(_c.color, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(
-            dc.getWidth() / 2, 
-            dc.getHeight() / 2, 
-            Graphics.FONT_GLANCE_NUMBER, 
-            _c.inclination.format("%.1f") + degreeSymbol + " " + glanceAlphaText, 
-            Graphics.TEXT_JUSTIFY_CENTER
+        var alphaText = new WatchUi.Text(
+            {
+            :text=>alphaSymbol, 
+            :color=>_c.alphaColor,
+            :font=>Graphics.FONT_MEDIUM,
+            :locX=>WatchUi.LAYOUT_HALIGN_START + 60,
+            :locY=>WatchUi.LAYOUT_VALIGN_CENTER
+            }
         );
+        var inclinationText = new WatchUi.Text(
+            {
+            :text=>_c.inclination.format("%.1f") + degreeSymbol, 
+            :color=>_c.color,
+            :font=>Graphics.FONT_GLANCE_NUMBER,
+            :locX=>WatchUi.LAYOUT_HALIGN_LEFT,
+            :locY=>WatchUi.LAYOUT_VALIGN_CENTER
+            }
+        );
+        inclinationText.draw(dc);
+        alphaText.draw(dc);
     }
 
     // Called when this View is removed from the screen. Save the
