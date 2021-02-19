@@ -5,11 +5,13 @@
         <label id="inclination" text="" x="center" y="60" font="Gfx.FONT_MEDIUM" justification="Gfx.TEXT_JUSTIFY_CENTER" color="Gfx.COLOR_BLUE" />    
         <label id="pitch" text="" x="center" y="100" font="Gfx.FONT_SMALL" justification="Gfx.TEXT_JUSTIFY_CENTER" color="Gfx.COLOR_BLUE" />
         <label id="roll" text="" x="center" y="120" font="Gfx.FONT_SMALL" justification="Gfx.TEXT_JUSTIFY_CENTER" color="Gfx.COLOR_BLUE" />
+        <label id="alpha" text="" x="center" y="130" font="Gfx.FONT_SMALL" justification="Gfx.TEXT_JUSTIFY_CENTER" color="Gfx.COLOR_BLUE" />    
         <label id="debugOutput" text="" x="center" y="150" font="Gfx.FONT_SMALL" justification="Gfx.TEXT_JUSTIFY_CENTER" color="Gfx.COLOR_BLUE" />
     </layout>
     <layout id="MainLayout">
         <label id="header" text="Slope Angle" x="center" y="10" font="Gfx.FONT_MEDIUM" justification="Gfx.TEXT_JUSTIFY_CENTER" color="Gfx.COLOR_RED" />
         <label id="inclination" text="" x="center" y="center" font="Gfx.FONT_LARGE" justification="Gfx.TEXT_JUSTIFY_CENTER" color="Gfx.COLOR_BLUE" />    
+        <label id="alpha" text="" x="center" y="150" font="Gfx.FONT_LARGE" justification="Gfx.TEXT_JUSTIFY_CENTER" color="Gfx.COLOR_BLUE" />    
     </layout>
 </layouts>
 </resources>
