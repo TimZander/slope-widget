@@ -19,4 +19,8 @@ class SlopeWidgetApp extends Application.AppBase {
         return [ new SlopeWidgetView() ];
     }
 
+    (:glance)
+    function getGlanceView() {
+        return [ new SlopeWidgetGlanceView() ];
+    }
 }
