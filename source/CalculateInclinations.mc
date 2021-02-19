@@ -1,7 +1,9 @@
+(:glance)
 class CalculateInclinations{
     var pitch, roll, inclination;
     var xAccel, yAccel, zAccel;
     var color, alphaColor;
+    var alphaSafe;
     function calculate() {
         var sensorInfo = Sensor.getInfo();
         if (sensorInfo has :accel && sensorInfo.accel != null) {
@@ -22,6 +24,12 @@ class CalculateInclinations{
         pitch = Math.toDegrees(pitchRad);
         roll = Math.toDegrees(rollRad);
         inclination = Math.toDegrees(inclinationRad);
+        if(inclination < 18){
+            alphaSafe = true;
+        }
+        else{
+            alphaSafe = false;
+        }
         sanitizeAngles();
         setColor();
     }
@@ -58,7 +66,7 @@ class CalculateInclinations{
             color = Graphics.COLOR_YELLOW;
         }
         
-        if(inclination < 18){
+        if(alphaSafe){
             alphaColor = Graphics.COLOR_GREEN;
         }
         else{
