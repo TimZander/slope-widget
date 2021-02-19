@@ -48,7 +48,9 @@ class SlopeWidgetView extends WatchUi.View {
             rollLabel.setText("roll: " + _c.roll.format("%.1f") + degreeSymbol);
         }
         inclinationLabel.setText("incl: " + _c.inclination.format("%.1f") + degreeSymbol);
-        inclinationLabel.setBackgroundColor(_c.color);
+        if(_app.getProperty("changeColor") == null ? true : _app.getProperty("changeColor")){
+            inclinationLabel.setColor(_c.color);
+        }
         View.onUpdate(dc);
     }
 
