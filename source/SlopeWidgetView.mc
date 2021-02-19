@@ -3,10 +3,7 @@ using Toybox.Timer;
 
 class SlopeWidgetView extends WatchUi.View {
 
-    var debugLabel;
-    var pitchLabel;
-    var rollLabel;
-    var inclinationLabel;
+    var debugLabel, pitchLabel, rollLabel, inclinationLabel;
     hidden var timer;
     var degreeSymbol = StringUtil.utf8ArrayToString([0xC2,0xB0]);
     hidden var _c;
@@ -43,14 +40,15 @@ class SlopeWidgetView extends WatchUi.View {
     // Update the view
     function onUpdate(dc) {
         _c.calculate();
-        //System.println("x: " + xAccel + ", y: " + yAccel + ", z: " + zAccel);
-        //System.println("pitch: " + pitch.format("%.1f") + ", roll: " + roll.format("%.1f"));
+        //System.println("x: " + _c.xAccel + ", y: " + _c.yAccel + ", z: " + _c.zAccel);
+        //System.println("pitch: " + _c.pitch.format("%.1f") + ", roll: " + _c.roll.format("%.1f"));
         if(_app.getProperty("showDebug") == null ? true : _app.getProperty("showDebug")){
             debugLabel.setText("x: " + _c.xAccel + ", y: " + _c.yAccel + ", z: " + _c.zAccel);
             pitchLabel.setText("pitch: " + _c.pitch.format("%.1f") + degreeSymbol);
             rollLabel.setText("roll: " + _c.roll.format("%.1f") + degreeSymbol);
         }
         inclinationLabel.setText("incl: " + _c.inclination.format("%.1f") + degreeSymbol);
+        inclinationLabel.setBackgroundColor(_c.color);
         View.onUpdate(dc);
     }
 
