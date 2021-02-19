@@ -1,3 +1,6 @@
+using Toybox.Application;
+using Toybox.System;
+
 (:glance)
 class CalculateInclinations{
     var pitch, roll, inclination;
@@ -24,14 +27,23 @@ class CalculateInclinations{
         pitch = Math.toDegrees(pitchRad);
         roll = Math.toDegrees(rollRad);
         inclination = Math.toDegrees(inclinationRad);
-        if(inclination < 18){
-            alphaSafe = true;
+        alphaSafe = isAlphaSafe();
+
+        //sanitizeAngles();
+        setColor();
+    }
+
+    function isAlphaSafe() {
+        System.println("enter isAlphaSafe");
+        System.println("isAlphaSafe property " + Application.Properties.getValue("alphaAngle"));
+        var alphaAngle = Application.Properties.getValue("alphaAngle") == null ? 50 : Application.Properties.getValue("alphaAngle");
+        System.println("isAlphaSafe alphaAngle " + alphaAngle);
+        if(inclination < alphaAngle){
+            return true;
         }
         else{
-            alphaSafe = false;
+            return false;
         }
-        sanitizeAngles();
-        setColor();
     }
 
     function sanitizeAngles(){
