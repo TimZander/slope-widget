@@ -57,7 +57,7 @@ class SlopeWidgetView extends WatchUi.View {
         if(_app.getProperty("changeColor") == null ? true : _app.getProperty("changeColor")){
             inclinationLabel.setColor(_c.color);
         }
-        if(_app.getProperty("displayAlpha") == null ? true : _app.getProperty("displayAlpha")){
+        if(_app.getProperty("showAlpha") == null ? true : _app.getProperty("showAlpha")){
             alphaLabel.setColor(_c.alphaColor);
             alphaLabel.setText(alphaSymbol + ">");
         }
