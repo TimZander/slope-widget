@@ -16,7 +16,9 @@ class SlopeWidgetApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() {
-        return [ new SlopeWidgetView() ];
+        var view = new SlopeWidgetView();
+        var delegate = new InputDelegate(view);
+        return [ view, delegate ];
     }
 
     (:glance)
