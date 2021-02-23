@@ -1,15 +1,13 @@
 <resources>
     <properties>
-    	<property id="showDebug" type="boolean">false</property>
         <property id="changeColor" type="boolean">true</property>
         <property id="showAlpha" type="boolean">true</property>
         <property id="alphaAngle" type="number">18</property>
+        <property id="enablePause" type="boolean">true</property>
+        <property id="showDebug" type="boolean">false</property>
     </properties>
 
     <settings>
-        <setting propertyKey="@Properties.showDebug" title="@Strings.showDebugTitle">
-            <settingConfig type="boolean" />
-		</setting>
         <setting propertyKey="@Properties.changeColor" title="@Strings.changeColorTitle">
             <settingConfig type="boolean" />
 		</setting>
@@ -18,6 +16,12 @@
 		</setting>
         <setting propertyKey="@Properties.alphaAngle" title="@Strings.alphaAngleTitle">
             <settingConfig type="numeric" min="15" max="30" />
+		</setting>
+        <setting propertyKey="@Properties.enablePause" title="@Strings.enablePauseTitle">
+            <settingConfig type="boolean" />
+		</setting>
+        <setting propertyKey="@Properties.showDebug" title="@Strings.showDebugTitle">
+            <settingConfig type="boolean" />
 		</setting>
     </settings>
 </resources>

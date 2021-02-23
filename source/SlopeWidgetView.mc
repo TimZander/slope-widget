@@ -9,9 +9,11 @@ class SlopeWidgetView extends WatchUi.View {
     var alphaSymbol = StringUtil.utf8ArrayToString([0xce,0xb1]);
     hidden var _c;
     hidden var _app;
+    hidden var _paused;
 
     function initialize() {
         _app = Application.getApp();
+        _paused = false;
         View.initialize();
     }
 
@@ -38,9 +40,10 @@ class SlopeWidgetView extends WatchUi.View {
 
     // Update the view
     function onUpdate(dc) {
-        _c.calculate();
-        //System.println("x: " + _c.xAccel + ", y: " + _c.yAccel + ", z: " + _c.zAccel);
-        //System.println("pitch: " + _c.pitch.format("%.1f") + ", roll: " + _c.roll.format("%.1f"));
+        if(!_paused) { 
+            _c.calculate();
+        }
+
         if(_app.getProperty("showDebug") == null ? true : _app.getProperty("showDebug")){
             debugLabel.setText("x: " + _c.xAccel + ", y: " + _c.yAccel + ", z: " + _c.zAccel);
             pitchLabel.setText("pitch: " + _c.pitch.format("%.1f") + degreeSymbol);
@@ -95,6 +98,14 @@ class SlopeWidgetView extends WatchUi.View {
                 );
                 alphaText.draw(dc);
             }
+            if(_app.getProperty("enablePause") == null ? false : _app.getProperty("enablePause")){
+                //highlight the pause button
+                var arcColor = _paused == true ? Graphics.COLOR_GREEN : Graphics.COLOR_RED;
+                dc.setColor(arcColor, Graphics.COLOR_TRANSPARENT);
+                dc.setPenWidth(10);
+                dc.drawArc(dc.getWidth()/2, dc.getHeight()/2, dc.getWidth()/2, Graphics.ARC_COUNTER_CLOCKWISE, 197, 215);
+            }
+
         }
     }
 
@@ -108,4 +119,8 @@ class SlopeWidgetView extends WatchUi.View {
     function timerCallback() {
     	requestUpdate();
 	}
+
+    function setPause() {
+        _paused = !_paused;
+    }
 }
