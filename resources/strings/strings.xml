@@ -4,5 +4,6 @@
     <string id="changeColorTitle">Show slope angle colors</string>
     <string id="showAlphaTitle">Show Alpha Angle</string>
     <string id="alphaAngleTitle">Alpha Angle(degrees)</string>
+    <string id="enablePauseTitle">Enable Pause</string>
     <string id="refreshFrequencyTitle">Refresh Frequency(ms)</string>
 </strings>
