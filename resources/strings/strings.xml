@@ -3,4 +3,5 @@
     <string id="showDebugTitle">Show Debug Info</string>
     <string id="changeColorTitle">Show slope angle colors</string>
     <string id="showAlphaTitle">Show Alpha Angle</string>
+    <string id="alphaAngleTitle">Alpha Angle(degrees)</string>
 </strings>

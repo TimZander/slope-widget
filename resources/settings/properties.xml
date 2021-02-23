@@ -3,6 +3,7 @@
     	<property id="showDebug" type="boolean">false</property>
         <property id="changeColor" type="boolean">true</property>
         <property id="showAlpha" type="boolean">true</property>
+        <property id="alphaAngle" type="number">18</property>
     </properties>
 
     <settings>
@@ -14,6 +15,9 @@
 		</setting>
         <setting propertyKey="@Properties.showAlpha" title="@Strings.showAlphaTitle">
             <settingConfig type="boolean" />
+		</setting>
+        <setting propertyKey="@Properties.alphaAngle" title="@Strings.alphaAngleTitle">
+            <settingConfig type="numeric" min="15" max="30" />
 		</setting>
     </settings>
 </resources>
