@@ -10,8 +10,10 @@ class SlopeWidgetGlanceView extends WatchUi.GlanceView {
     hidden var _timer, _c;
     hidden var _centerX;
     hidden var _centerY;
+    hidden var _app;
 
     function initialize() {
+        _app = Application.getApp();
         GlanceView.initialize();
     }
 
@@ -35,7 +37,6 @@ class SlopeWidgetGlanceView extends WatchUi.GlanceView {
         );
         inclinationText.draw(dc);
         if(_app.getProperty("showAlpha") == null ? true : _app.getProperty("showAlpha")){
-            alphaText.draw(dc);
             var alphaText = new WatchUi.Text(
                 {
                     :text=>alphaSymbol + "<", 
@@ -45,6 +46,7 @@ class SlopeWidgetGlanceView extends WatchUi.GlanceView {
                     :locY=>WatchUi.LAYOUT_VALIGN_CENTER
                 }
             );
+            alphaText.draw(dc);
         }
     }
 
