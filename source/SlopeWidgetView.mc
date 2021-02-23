@@ -55,7 +55,10 @@ class SlopeWidgetView extends WatchUi.View {
             View.onUpdate(dc);
         }
         else {
-            View.onUpdate(dc);
+            dc.clear();
+            dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+            dc.fillRectangle(0, 0, dc.getWidth(), dc.getHeight());
+            
             var titleText = new WatchUi.Text(
                 {
                     :text=>"Slope Angle", 
