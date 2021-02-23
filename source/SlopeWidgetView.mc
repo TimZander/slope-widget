@@ -35,7 +35,8 @@ class SlopeWidgetView extends WatchUi.View {
     function onShow() {
         _c = new CalculateInclinations();
         timer = new Timer.Timer();
-    	timer.start(method(:timerCallback), 1000, true);
+        var refreshFrequency = _app.getProperty("refreshFrequency") == null ? 1000 : _app.getProperty("refreshFrequency");
+    	timer.start(method(:timerCallback), refreshFrequency, true);
     }
 
     // Update the view

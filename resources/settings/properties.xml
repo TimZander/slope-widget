@@ -3,6 +3,7 @@
         <property id="changeColor" type="boolean">true</property>
         <property id="showAlpha" type="boolean">true</property>
         <property id="alphaAngle" type="number">18</property>
+        <property id="refreshFrequency" type="number">500</property>
         <property id="enablePause" type="boolean">true</property>
         <property id="showDebug" type="boolean">false</property>
     </properties>
@@ -16,6 +17,9 @@
 		</setting>
         <setting propertyKey="@Properties.alphaAngle" title="@Strings.alphaAngleTitle">
             <settingConfig type="numeric" min="15" max="30" />
+		</setting>
+        <setting propertyKey="@Properties.refreshFrequency" title="@Strings.refreshFrequencyTitle">
+            <settingConfig type="numeric" min="100" max="1000" />
 		</setting>
         <setting propertyKey="@Properties.enablePause" title="@Strings.enablePauseTitle">
             <settingConfig type="boolean" />
