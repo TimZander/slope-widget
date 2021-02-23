@@ -55,6 +55,16 @@ class SlopeWidgetView extends WatchUi.View {
             View.onUpdate(dc);
         }
         else {
+            var titleText = new WatchUi.Text(
+                {
+                    :text=>"Slope Angle", 
+                    :font=>Graphics.FONT_MEDIUM,
+                    :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
+                    :locY=>10
+                }
+            );
+            titleText.draw(dc);
+
             var inclinationFont = Graphics.FONT_NUMBER_THAI_HOT;
             var inclinationText = new WatchUi.Text(
                 {
