@@ -28,39 +28,16 @@ class CalculateInclinations{
         roll = Math.toDegrees(rollRad);
         inclination = Math.toDegrees(inclinationRad);
         alphaSafe = isAlphaSafe();
-
-        //sanitizeAngles();
         setColor();
     }
 
     function isAlphaSafe() {
-        System.println("enter isAlphaSafe");
-        System.println("isAlphaSafe property " + Application.Properties.getValue("alphaAngle"));
         var alphaAngle = Application.Properties.getValue("alphaAngle") == null ? 50 : Application.Properties.getValue("alphaAngle");
-        System.println("isAlphaSafe alphaAngle " + alphaAngle);
         if(inclination < alphaAngle){
             return true;
         }
         else{
             return false;
-        }
-    }
-
-    function sanitizeAngles(){
-        if(pitch > -180 and pitch < 0){
-            pitch = -pitch;
-        }
-        // while(pitch < -90){
-        //     pitch = pitch + 90;
-        // }
-        while(roll > 90){
-            roll = roll - 180;
-        }
-        while(roll < -90){
-            roll = roll + 180;
-        }
-        if(roll > -180 and roll < 0){
-            roll = -roll;
         }
     }
 

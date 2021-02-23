@@ -3,7 +3,7 @@
     	<property id="showDebug" type="boolean">false</property>
         <property id="changeColor" type="boolean">true</property>
         <property id="showAlpha" type="boolean">true</property>
-        <property id="alphaAngle" type="number">19</property>
+        <property id="alphaAngle" type="number">18</property>
     </properties>
 
     <settings>

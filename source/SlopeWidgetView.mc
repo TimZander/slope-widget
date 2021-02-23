@@ -48,12 +48,16 @@ class SlopeWidgetView extends WatchUi.View {
             debugLabel.setText("x: " + _c.xAccel + ", y: " + _c.yAccel + ", z: " + _c.zAccel);
             pitchLabel.setText("pitch: " + _c.pitch.format("%.1f") + degreeSymbol);
             rollLabel.setText("roll: " + _c.roll.format("%.1f") + degreeSymbol);
+            inclinationLabel.setText("incl: " + _c.inclination.format("%.1f") + degreeSymbol);
         }
-        inclinationLabel.setText("incl: " + _c.inclination.format("%.1f") + degreeSymbol);
+        else {
+            inclinationLabel.setText(_c.inclination.format("%.1f") + degreeSymbol);
+        }
+        
         if(_app.getProperty("changeColor") == null ? true : _app.getProperty("changeColor")){
             inclinationLabel.setColor(_c.color);
         }
-        if(_app.getProperty("displayAlpha") == null ? true : _app.getProperty("displayAlpha")){
+        if(_app.getProperty("showAlpha") == null ? true : _app.getProperty("showAlpha")){
             alphaLabel.setColor(_c.alphaColor);
             alphaLabel.setText(alphaSymbol + ">");
         }
