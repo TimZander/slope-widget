@@ -22,12 +22,9 @@ class SlopeWidgetView extends WatchUi.View {
             debugLabel = View.findDrawableById("debugOutput");
             pitchLabel = View.findDrawableById("pitch");
             rollLabel = View.findDrawableById("roll");
+            inclinationLabel = View.findDrawableById("inclination");
+            alphaLabel = View.findDrawableById("alpha");
         }
-        else{
-            setLayout(Rez.Layouts.MainLayout(dc));
-        }
-        inclinationLabel = View.findDrawableById("inclination");
-        alphaLabel = View.findDrawableById("alpha");
     }
 
     // Called when this View is brought to the foreground. Restore
@@ -49,19 +46,42 @@ class SlopeWidgetView extends WatchUi.View {
             pitchLabel.setText("pitch: " + _c.pitch.format("%.1f") + degreeSymbol);
             rollLabel.setText("roll: " + _c.roll.format("%.1f") + degreeSymbol);
             inclinationLabel.setText("incl: " + _c.inclination.format("%.1f") + degreeSymbol);
-        }
-        else {
             inclinationLabel.setText(_c.inclination.format("%.1f") + degreeSymbol);
-        }
-        
-        if(_app.getProperty("changeColor") == null ? true : _app.getProperty("changeColor")){
-            inclinationLabel.setColor(_c.color);
-        }
-        if(_app.getProperty("showAlpha") == null ? true : _app.getProperty("showAlpha")){
+            if(_app.getProperty("changeColor") == null ? true : _app.getProperty("changeColor")){
+                inclinationLabel.setColor(_c.color);
+            }
             alphaLabel.setColor(_c.alphaColor);
             alphaLabel.setText(alphaSymbol + ">");
+            View.onUpdate(dc);
         }
-        View.onUpdate(dc);
+        else {
+            var inclinationFont = Graphics.FONT_NUMBER_THAI_HOT;
+            var inclinationText = new WatchUi.Text(
+                {
+                    :text=>_c.inclination.format("%.1f") + degreeSymbol, 
+                    :color=>_c.color,
+                    :font=>inclinationFont,
+                    :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
+                    :locY=>WatchUi.LAYOUT_VALIGN_CENTER
+                }
+            );
+            inclinationText.draw(dc);
+
+            if(_app.getProperty("showAlpha") == null ? true : _app.getProperty("showAlpha")){
+                var alphaFont = Graphics.FONT_LARGE;
+                var locY = (dc.getHeight() / 2) + (Graphics.getFontHeight(inclinationFont) / 4) + (Graphics.getFontHeight(alphaFont) / 4);                
+                var alphaText = new WatchUi.Text(
+                    {
+                        :text=>alphaSymbol + ">", 
+                        :color=>_c.alphaColor,
+                        :font=>alphaFont,
+                        :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
+                        :locY=>locY
+                    }
+                );
+                alphaText.draw(dc);
+            }
+        }
     }
 
     // Called when this View is removed from the screen. Save the

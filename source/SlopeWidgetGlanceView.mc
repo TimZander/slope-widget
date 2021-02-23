@@ -39,7 +39,7 @@ class SlopeWidgetGlanceView extends WatchUi.GlanceView {
         if(_app.getProperty("showAlpha") == null ? true : _app.getProperty("showAlpha")){
             var alphaText = new WatchUi.Text(
                 {
-                    :text=>alphaSymbol + "<", 
+                    :text=>alphaSymbol + ">", 
                     :color=>_c.alphaColor,
                     :font=>Graphics.FONT_MEDIUM,
                     :locX=>WatchUi.LAYOUT_HALIGN_START + 60,
