@@ -55,6 +55,7 @@ class SlopeWidgetView extends WatchUi.View {
             View.onUpdate(dc);
         }
         else {
+            View.onUpdate(dc);
             var titleText = new WatchUi.Text(
                 {
                     :text=>"Slope Angle", 
