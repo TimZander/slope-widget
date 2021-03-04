@@ -1,1 +1,3 @@
 project.manifest = manifest.xml
+round-218x218.resourcePath = $(round-218x218.resourcePath);resources-round-218x218
+fenix5s.resourcePath = $(fenix5s.resourcePath);resources-fenix5s
