@@ -99,14 +99,7 @@ class SlopeWidgetView extends WatchUi.View {
                 );
                 alphaText.draw(dc);
             }
-            if(_app.getProperty("enablePause") == null ? false : _app.getProperty("enablePause")){
-                //highlight the pause button
-                var arcColor = _paused == true ? Graphics.COLOR_GREEN : Graphics.COLOR_RED;
-                dc.setColor(arcColor, Graphics.COLOR_TRANSPARENT);
-                dc.setPenWidth(10);
-                dc.drawArc(dc.getWidth()/2, dc.getHeight()/2, dc.getWidth()/2, Graphics.ARC_COUNTER_CLOCKWISE, 197, 215);
-            }
-
+            drawHold(dc);
         }
     }
 
@@ -122,6 +115,20 @@ class SlopeWidgetView extends WatchUi.View {
 	}
 
     function setPause() {
-        _paused = !_paused;
+        if(_app.getProperty("enableHold") == null ? false : _app.getProperty("enableHold")) {
+            _paused = !_paused;
+        } else {
+            _paused = false;
+        }
+    }
+
+    function drawHold(dc) {
+        if(_app.getProperty("enableHold") == null ? false : _app.getProperty("enableHold")) {
+            //highlight the hold button
+            var arcColor = _paused == true ? Graphics.COLOR_GREEN : Graphics.COLOR_RED;
+            dc.setColor(arcColor, Graphics.COLOR_TRANSPARENT);
+            dc.setPenWidth(10);
+            dc.drawArc(dc.getWidth()/2, dc.getHeight()/2, dc.getWidth()/2, Graphics.ARC_COUNTER_CLOCKWISE, 197, 215);
+        }
     }
 }
