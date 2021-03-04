@@ -14,6 +14,8 @@
             "Connect IQ: Edit Products" - Lets you add or remove any product
         -->
         <iq:products>
+            <iq:product id="approachs62"/>
+            <iq:product id="d2air"/>
             <iq:product id="d2charlie"/>
             <iq:product id="d2delta"/>
             <iq:product id="d2deltapx"/>
@@ -40,6 +42,10 @@
             <iq:product id="fr745"/>
             <iq:product id="fr935"/>
             <iq:product id="fr945"/>
+            <iq:product id="legacyherocaptainmarvel"/>
+            <iq:product id="legacyherofirstavenger"/>
+            <iq:product id="legacysagadarthvader"/>
+            <iq:product id="legacysagarey"/>
             <iq:product id="marqadventurer"/>
             <iq:product id="marqathlete"/>
             <iq:product id="marqaviator"/>
@@ -48,6 +54,16 @@
             <iq:product id="marqdriver"/>
             <iq:product id="marqexpedition"/>
             <iq:product id="marqgolfer"/>
+            <iq:product id="venu"/>
+            <iq:product id="venud"/>
+            <iq:product id="venusq"/>
+            <iq:product id="venusqm"/>
+            <iq:product id="vivoactive3"/>
+            <iq:product id="vivoactive3d"/>
+            <iq:product id="vivoactive3m"/>
+            <iq:product id="vivoactive3mlte"/>
+            <iq:product id="vivoactive4"/>
+            <iq:product id="vivoactive4s"/>
         </iq:products>
         <!--
             Use "Connect IQ: Edit Permissions" from the Visual Studio Code command

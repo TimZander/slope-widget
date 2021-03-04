@@ -104,6 +104,7 @@ class SlopeWidgetView extends WatchUi.View {
         }
     }
 
+    (:buttonDevice)
     function drawHold(dc) {
         if(_app.getProperty("enableHold") == null ? false : _app.getProperty("enableHold")) {
             //highlight the hold button
@@ -112,6 +113,10 @@ class SlopeWidgetView extends WatchUi.View {
             dc.setPenWidth(10);
             dc.drawArc(dc.getWidth()/2, dc.getHeight()/2, dc.getWidth()/2, Graphics.ARC_COUNTER_CLOCKWISE, 197, 215);
         }
+    }
+
+    (:touchDevice)
+    function drawHold(dc) {
     }
 
     function drawAlpha(dc) {

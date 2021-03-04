@@ -1,1 +1,12 @@
 project.manifest = manifest.xml
+base.excludeAnnotations = touchDevice
+vivoactive4.excludeAnnotations = buttonDevice
+vivoactive4s.excludeAnnotations = buttonDevice
+vivoactive3.excludeAnnotations = buttonDevice
+vivoactive3mlte.excludeAnnotations = buttonDevice
+vivoactive3m.excludeAnnotations = buttonDevice
+vivoactive3d.excludeAnnotations = buttonDevice
+venusqm.excludeAnnotations = buttonDevice
+venusq.excludeAnnotations = buttonDevice
+venud.excludeAnnotations = buttonDevice
+venu.excludeAnnotations = buttonDevice
