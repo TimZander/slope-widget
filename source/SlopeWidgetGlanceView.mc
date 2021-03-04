@@ -26,16 +26,27 @@ class SlopeWidgetGlanceView extends WatchUi.GlanceView {
     // Update the view
     function onUpdate(dc) {
         _c.calculate();
-        var inclinationText = new WatchUi.Text(
-            {
-                :text=>_c.inclination.format("%.1f") + degreeSymbol, 
-                :color=>_c.color,
-                :font=>Graphics.FONT_GLANCE_NUMBER,
-                :locX=>WatchUi.LAYOUT_HALIGN_LEFT,
-                :locY=>WatchUi.LAYOUT_VALIGN_CENTER
-            }
-        );
-        inclinationText.draw(dc);
+        if (_c.noData) {
+            drawNoData(dc);
+        }
+        else {
+            drawInclination(dc);
+            drawAlpha(dc);
+        }
+    }
+
+    // Called when this View is removed from the screen. Save the
+    // state of this View here. This includes freeing resources from
+    // memory.
+    function onHide() {
+        _timer.stop();
+    }
+
+    function timerCallback() {
+    	requestUpdate();
+	}
+
+    function drawAlpha(dc) {
         if(_app.getProperty("showAlpha") == null ? true : _app.getProperty("showAlpha")){
             var alphaText = new WatchUi.Text(
                 {
@@ -50,14 +61,37 @@ class SlopeWidgetGlanceView extends WatchUi.GlanceView {
         }
     }
 
-    // Called when this View is removed from the screen. Save the
-    // state of this View here. This includes freeing resources from
-    // memory.
-    function onHide() {
-        _timer.stop();
+    function drawNoData(dc) {
+        var text;
+        if(dc.getWidth() >= 151) {
+            text = "Accelerometer error";
+        }
+        else {
+            text = "Accel error";
+        }
+        var noDataText = new WatchUi.Text(
+            {
+                :text=>text, 
+                :color=>Graphics.COLOR_WHITE,
+                :font=>Graphics.FONT_GLANCE,
+                :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
+                :locY=>WatchUi.LAYOUT_VALIGN_CENTER
+            }
+        );
+        noDataText.draw(dc);
     }
 
-    function timerCallback() {
-    	requestUpdate();
-	}
+    function drawInclination(dc) {
+        var inclinationText = new WatchUi.Text(
+            {
+                :text=>_c.inclination.format("%.1f") + degreeSymbol, 
+                :color=>_c.color,
+                :font=>Graphics.FONT_GLANCE_NUMBER,
+                :locX=>WatchUi.LAYOUT_HALIGN_LEFT,
+                :locY=>WatchUi.LAYOUT_VALIGN_CENTER
+            }
+        );
+        inclinationText.draw(dc);
+    }
+
 }
