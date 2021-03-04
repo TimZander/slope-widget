@@ -10,6 +10,7 @@ class SlopeWidgetView extends WatchUi.View {
     hidden var _c;
     hidden var _app;
     hidden var _paused;
+    hidden var _inclinationFont = Graphics.FONT_NUMBER_THAI_HOT;
 
     function initialize() {
         _app = Application.getApp();
@@ -73,33 +74,14 @@ class SlopeWidgetView extends WatchUi.View {
             );
             titleText.draw(dc);
 
-            var inclinationFont = Graphics.FONT_NUMBER_THAI_HOT;
-            var inclinationText = new WatchUi.Text(
-                {
-                    :text=>_c.inclination.format("%.1f") + degreeSymbol, 
-                    :color=>_c.color,
-                    :font=>inclinationFont,
-                    :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
-                    :locY=>WatchUi.LAYOUT_VALIGN_CENTER
-                }
-            );
-            inclinationText.draw(dc);
-
-            if(_app.getProperty("showAlpha") == null ? true : _app.getProperty("showAlpha")){
-                var alphaFont = Graphics.FONT_LARGE;
-                var locY = (dc.getHeight() / 2) + (Graphics.getFontHeight(inclinationFont) / 4) + (Graphics.getFontHeight(alphaFont) / 4);                
-                var alphaText = new WatchUi.Text(
-                    {
-                        :text=>alphaSymbol + ">", 
-                        :color=>_c.alphaColor,
-                        :font=>alphaFont,
-                        :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
-                        :locY=>locY
-                    }
-                );
-                alphaText.draw(dc);
+            if (_c.noData) {
+                drawNoData(dc);
             }
-            drawHold(dc);
+            else {
+                drawInclination(dc);
+                drawAlpha(dc);
+                drawHold(dc);
+            }
         }
     }
 
@@ -130,5 +112,55 @@ class SlopeWidgetView extends WatchUi.View {
             dc.setPenWidth(10);
             dc.drawArc(dc.getWidth()/2, dc.getHeight()/2, dc.getWidth()/2, Graphics.ARC_COUNTER_CLOCKWISE, 197, 215);
         }
+    }
+
+    function drawAlpha(dc) {
+        if(_app.getProperty("showAlpha") == null ? true : _app.getProperty("showAlpha")){
+            var alphaFont = Graphics.FONT_LARGE;
+            var locY = (dc.getHeight() / 2) + (Graphics.getFontHeight(_inclinationFont) / 4) + (Graphics.getFontHeight(alphaFont) / 4);                
+            var alphaText = new WatchUi.Text(
+                {
+                    :text=>alphaSymbol + ">", 
+                    :color=>_c.alphaColor,
+                    :font=>alphaFont,
+                    :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
+                    :locY=>locY
+                }
+            );
+            alphaText.draw(dc);
+        }
+    }
+
+    function drawNoData(dc) {
+        var text;
+        if(dc.getWidth() >= 240) {
+            text = "Error getting \naccelerometer data";
+        }
+        else {
+            text = "Error getting \naccelerometer \ndata";
+        }
+        var noDataText = new WatchUi.Text(
+            {
+                :text=>text, 
+                :color=>Graphics.COLOR_WHITE,
+                :font=>Graphics.FONT_MEDIUM,
+                :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
+                :locY=>WatchUi.LAYOUT_VALIGN_CENTER
+            }
+        );
+        noDataText.draw(dc);
+    }
+
+    function drawInclination(dc) {
+        var inclinationText = new WatchUi.Text(
+            {
+                :text=>_c.inclination.format("%.1f") + degreeSymbol, 
+                :color=>_c.color,
+                :font=>_inclinationFont,
+                :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
+                :locY=>WatchUi.LAYOUT_VALIGN_CENTER
+            }
+        );
+        inclinationText.draw(dc);
     }
 }
