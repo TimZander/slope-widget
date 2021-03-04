@@ -4,7 +4,7 @@
         <property id="showAlpha" type="boolean">true</property>
         <property id="alphaAngle" type="number">18</property>
         <property id="refreshFrequency" type="number">500</property>
-        <property id="enablePause" type="boolean">true</property>
+        <property id="enableHold" type="boolean">true</property>
         <property id="showDebug" type="boolean">false</property>
     </properties>
 
@@ -21,7 +21,7 @@
         <setting propertyKey="@Properties.refreshFrequency" title="@Strings.refreshFrequencyTitle">
             <settingConfig type="numeric" min="100" max="1000" />
 		</setting>
-        <setting propertyKey="@Properties.enablePause" title="@Strings.enablePauseTitle">
+        <setting propertyKey="@Properties.enableHold" title="@Strings.enableHoldTitle">
             <settingConfig type="boolean" />
 		</setting>
         <setting propertyKey="@Properties.showDebug" title="@Strings.showDebugTitle">

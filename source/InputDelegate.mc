@@ -10,9 +10,8 @@ class InputDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onKey(keyEvent) {
-        if(keyEvent.getKey() == WatchUi.KEY_DOWN){
+        if(keyEvent.getKey() == WatchUi.KEY_DOWN) {
             callback.setPause();
         }
-        System.println(keyEvent.getKey());
     }
 }
