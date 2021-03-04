@@ -7,15 +7,19 @@ class CalculateInclinations{
     var xAccel, yAccel, zAccel;
     var color, alphaColor;
     var alphaSafe;
+    var noData;
+
     function calculate() {
         var sensorInfo = Sensor.getInfo();
         if (sensorInfo has :accel && sensorInfo.accel != null) {
+            noData = false;
             var accel = sensorInfo.accel;
             xAccel = accel[0];
             yAccel = accel[1];
             zAccel = accel[2];
         }
         else{
+            noData = true;
             //test inputs
             xAccel = -921;
             yAccel = -37;
