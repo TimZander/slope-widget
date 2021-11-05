@@ -26,6 +26,7 @@ class SlopeWidgetGlanceView extends WatchUi.GlanceView {
     // Update the view
     function onUpdate(dc) {
         _c.calculate();
+        drawAppName(dc);
         if (_c.noData) {
             drawNoData(dc);
         }
@@ -46,6 +47,19 @@ class SlopeWidgetGlanceView extends WatchUi.GlanceView {
     	requestUpdate();
 	}
 
+    function drawAppName(dc) {
+        var inclinationText = new WatchUi.Text(
+            {
+                :text=>"Slope Angle", 
+                :color=>Graphics.COLOR_BLUE,
+                :font=>Graphics.FONT_SMALL,
+                :locX=>WatchUi.LAYOUT_HALIGN_LEFT,
+                :locY=>WatchUi.LAYOUT_VALIGN_TOP
+            }
+        );
+        inclinationText.draw(dc);
+    }
+
     function drawAlpha(dc) {
         if(_app.getProperty("showAlpha") == null ? true : _app.getProperty("showAlpha")){
             var alphaText = new WatchUi.Text(
@@ -54,7 +68,7 @@ class SlopeWidgetGlanceView extends WatchUi.GlanceView {
                     :color=>_c.alphaColor,
                     :font=>Graphics.FONT_MEDIUM,
                     :locX=>WatchUi.LAYOUT_HALIGN_START + 60,
-                    :locY=>WatchUi.LAYOUT_VALIGN_CENTER
+                    :locY=>WatchUi.LAYOUT_VALIGN_BOTTOM
                 }
             );
             alphaText.draw(dc);
@@ -75,7 +89,7 @@ class SlopeWidgetGlanceView extends WatchUi.GlanceView {
                 :color=>Graphics.COLOR_WHITE,
                 :font=>Graphics.FONT_GLANCE,
                 :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
-                :locY=>WatchUi.LAYOUT_VALIGN_CENTER
+                :locY=>WatchUi.LAYOUT_VALIGN_BOTTOM
             }
         );
         noDataText.draw(dc);
@@ -88,7 +102,7 @@ class SlopeWidgetGlanceView extends WatchUi.GlanceView {
                 :color=>_c.color,
                 :font=>Graphics.FONT_GLANCE_NUMBER,
                 :locX=>WatchUi.LAYOUT_HALIGN_LEFT,
-                :locY=>WatchUi.LAYOUT_VALIGN_CENTER
+                :locY=>WatchUi.LAYOUT_VALIGN_BOTTOM
             }
         );
         inclinationText.draw(dc);
