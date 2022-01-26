@@ -3,11 +3,14 @@ using Toybox.System;
 
 (:glance)
 class CalculateInclinations{
-    var pitch, roll, inclination;
+    var pitch, roll, inclination, rollNormalized;
     var xAccel, yAccel, zAccel;
-    var color, alphaColor;
+    var color, alphaColor, rollColor, pitchColor;
     var alphaSafe;
     var noData;
+    var greenAngle = 25;
+    var yellowAngle = 30;
+    var redAngle = 50;
 
     function calculate() {
         var sensorInfo = Sensor.getInfo();
@@ -30,6 +33,17 @@ class CalculateInclinations{
         var inclinationRad = Math.atan(Math.sqrt(Math.pow(Math.tan(pitchRad), 2) + Math.pow(Math.tan(rollRad), 2)));
         pitch = Math.toDegrees(pitchRad);
         roll = Math.toDegrees(rollRad);
+
+        if(roll > 90){
+            rollNormalized = roll - 180;
+        }
+        else if(roll < -90){
+            rollNormalized = roll + 180; 
+        }
+        else{
+            rollNormalized = roll;
+        }
+        
         inclination = Math.toDegrees(inclinationRad);
         alphaSafe = isAlphaSafe();
         setColor();
@@ -46,19 +60,46 @@ class CalculateInclinations{
     }
 
     function setColor(){
-        if(inclination < 25){
+        if(inclination < greenAngle){
             color = Graphics.COLOR_GREEN;
         }
-        else if(inclination < 30){
+        else if(inclination < yellowAngle){
             color = Graphics.COLOR_YELLOW;
         }
-        else if(inclination < 50){
+        else if(inclination < redAngle){
             color = Graphics.COLOR_RED;
         }
         else{
             color = Graphics.COLOR_YELLOW;
         }
-        
+
+        if(rollNormalized.abs() < greenAngle){
+            rollColor = Graphics.COLOR_GREEN;
+        }
+        else if(rollNormalized.abs() < yellowAngle){
+            rollColor = Graphics.COLOR_YELLOW;
+        }
+        else if(rollNormalized.abs() < redAngle){
+            rollColor = Graphics.COLOR_RED;
+        }
+        else{
+            rollColor = Graphics.COLOR_YELLOW;
+        }
+
+        if(pitch.abs() < greenAngle){
+            pitchColor = Graphics.COLOR_GREEN;
+        }
+        else if(pitch.abs() < yellowAngle){
+            pitchColor = Graphics.COLOR_YELLOW;
+        }
+        else if(pitch.abs() < redAngle){
+            pitchColor = Graphics.COLOR_RED;
+        }
+        else{
+            pitchColor = Graphics.COLOR_YELLOW;
+        }
+
+
         if(alphaSafe){
             alphaColor = Graphics.COLOR_GREEN;
         }

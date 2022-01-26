@@ -7,6 +7,7 @@ class SlopeWidgetView extends WatchUi.View {
     hidden var timer;
     var degreeSymbol = StringUtil.utf8ArrayToString([0xC2,0xB0]);
     var alphaSymbol = StringUtil.utf8ArrayToString([0xce,0xb1]);
+    var flatConstant = 2;
     hidden var _c;
     hidden var _app;
     hidden var _paused;
@@ -63,24 +64,26 @@ class SlopeWidgetView extends WatchUi.View {
             dc.clear();
             dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
             dc.fillRectangle(0, 0, dc.getWidth(), dc.getHeight());
-            
-            var titleText = new WatchUi.Text(
-                {
-                    :text=>"Slope Angle", 
-                    :font=>Graphics.FONT_MEDIUM,
-                    :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
-                    :locY=>10
-                }
-            );
-            titleText.draw(dc);
 
             if (_c.noData) {
+                drawTitle(dc);
                 drawNoData(dc);
             }
             else {
-                drawInclination(dc);
-                drawAlpha(dc);
-                drawHold(dc);
+                if(_app.getProperty("showComponentAngles") == null ? false : _app.getProperty("showComponentAngles"))
+                {
+                    drawHold(dc);
+                    drawPitch(dc);
+                    drawRoll(dc);
+                    drawFlat(dc);
+                }
+                else 
+                {
+                    drawTitle(dc);
+                    drawInclination(dc);
+                    drawAlpha(dc);
+                    drawHold(dc);
+                }
             }
         }
     }
@@ -156,6 +159,18 @@ class SlopeWidgetView extends WatchUi.View {
         noDataText.draw(dc);
     }
 
+    function drawTitle(dc) {
+        var titleText = new WatchUi.Text(
+            {
+                :text=>"SLOPE ANGLE", 
+                :font=>Graphics.FONT_SMALL,
+                :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
+                :locY=>10
+            }
+        );
+        titleText.draw(dc);
+    }
+
     function drawInclination(dc) {
         var inclinationText = new WatchUi.Text(
             {
@@ -168,4 +183,61 @@ class SlopeWidgetView extends WatchUi.View {
         );
         inclinationText.draw(dc);
     }
+
+    function drawPitch(dc) {
+        var vAlign = WatchUi.LAYOUT_VALIGN_BOTTOM;
+        if(_c.pitch < 0){
+            vAlign = WatchUi.LAYOUT_VALIGN_TOP;
+        }
+        var pitchText = new WatchUi.Text(
+            {
+                :text=>_c.pitch.abs().format("%.1f") + degreeSymbol,
+                :color=>_c.pitchColor,
+                :font=>Graphics.FONT_NUMBER_MEDIUM,
+                :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
+                :locY=>vAlign
+            }
+        );
+        if(_c.pitch.abs() > flatConstant){
+            pitchText.draw(dc);
+        }
+    }
+
+    function drawRoll(dc) {
+        var hAlign = WatchUi.LAYOUT_HALIGN_LEFT;
+        if(_c.rollNormalized < 0){
+            hAlign = WatchUi.LAYOUT_HALIGN_RIGHT;
+        }
+        var rollText = new WatchUi.Text(
+            {
+                :text=>_c.rollNormalized.abs().format("%.1f") + degreeSymbol,
+                :color=>_c.rollColor,
+                :font=>Graphics.FONT_NUMBER_MEDIUM,
+                :locX=>hAlign,
+                :locY=>WatchUi.LAYOUT_VALIGN_CENTER
+            }
+        );
+
+        if(_c.rollNormalized.abs() > flatConstant){
+            rollText.draw(dc);
+        }
+    }
+
+    function drawFlat(dc) {
+        if(_c.rollNormalized.abs() < flatConstant && _c.pitch.abs() < flatConstant)
+        {
+            var flatText = new WatchUi.Text(
+                {
+                    :text=>"LEVEL",
+                    :color=>Graphics.COLOR_WHITE,
+                    :font=>Graphics.FONT_MEDIUM,
+                    :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
+                    :locY=>WatchUi.LAYOUT_VALIGN_CENTER
+                }
+            );
+
+            flatText.draw(dc);
+        }
+    }
+
 }
